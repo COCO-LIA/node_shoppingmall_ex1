@@ -3,6 +3,7 @@ const router = express.Router()
 
 const orderModel = require('../model/order')
 
+//전체 데이터 GET
 router.get("/od", (req, res) => {
     // res.json({
     //     message: "order get"
@@ -15,6 +16,23 @@ router.get("/od", (req, res) => {
                 msg: "total get",
                 count: docs.length,
                 order: docs
+            })
+        })
+        .catch(err => {
+            res.json({
+                msg: err.message
+            })
+        })
+})
+
+//상세 데이터 GET
+router.get("/:orderId", (req, res) => {
+    orderModel
+        .findById(req.params.orderId)
+        .then(item => {
+            res.json({
+                msg: "get order data" + item._id,
+                order: item
             })
         })
         .catch(err => {
