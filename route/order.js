@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
+const orderModel = require('../model/order')
+
 router.get("/od", (req, res) => {
     res.json({
         message: "order get"
@@ -8,18 +10,38 @@ router.get("/od", (req, res) => {
 })
 
 router.post("/", (req, res) => {
+    //
+    // const orderInfo = {
+    //     name: req.body.productname,
+    //     price: req.body.productprice,
+    //     category: req.body.category
+    // }
+    //
+    //
+    // res.json({
+    //     msg: "order 등록 API",
+    //     order: orderInfo
+    // })
 
-    const orderInfo = {
-        name: req.body.productname,
-        price: req.body.productprice,
+    const orderInfo = new orderModel({
+        name: req.body.ordername,
+        price: req.body.orderprice,
         category: req.body.category
-    }
-
-
-    res.json({
-        msg: "order 등록 API",
-        order: orderInfo
     })
+
+    orderInfo
+        .save()
+        .then(item => {
+            res.json({
+                msg: "saved",
+                orderInfo: item
+            })
+        })
+        .catch(err => {
+            res.json({
+                msg: err.message
+            })
+        })
 })
 
 router.patch("/", (req, res) => {
