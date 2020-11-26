@@ -4,9 +4,24 @@ const router = express.Router()
 const orderModel = require('../model/order')
 
 router.get("/od", (req, res) => {
-    res.json({
-        message: "order get"
-    })
+    // res.json({
+    //     message: "order get"
+    // })
+
+    orderModel
+        .find()
+        .then(docs => {
+            res.json({
+                msg: "total get",
+                count: docs.length,
+                order: docs
+            })
+        })
+        .catch(err => {
+            res.json({
+                msg: err.message
+            })
+        })
 })
 
 router.post("/", (req, res) => {
