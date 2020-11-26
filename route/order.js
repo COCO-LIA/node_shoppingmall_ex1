@@ -83,10 +83,41 @@ router.patch("/", (req, res) => {
     })
 })
 
+//전체 삭제
 router.delete("/", (req, res) =>{
-    res.json({
-        msg: "order 삭제 API"
-    })
+    // res.json({
+    //     msg: "order 삭제 API"
+    // })
+
+    orderModel
+        .deleteMany()
+        .then(() => {
+            res.json({
+                msg: "deleted All"
+            })
+        })
+        .catch(err => {
+            res.json({
+                msg: err.message
+            })
+        })
 })
+
+//부분 삭제
+router.delete("/:orderId", (req, res) => {
+    orderModel
+        .findByIdAndDelete(req.params.orderId)
+        .then(() => {
+            res.json({
+                msg: "deleted order"
+            })
+        })
+        .catch(err => {
+            res.json({
+                msg: err.message
+            })
+        })
+})
+
 
 module.exports = router
