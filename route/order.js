@@ -77,10 +77,30 @@ router.post("/", (req, res) => {
         })
 })
 
-router.patch("/", (req, res) => {
-    res.json({
-        msg: "order 수정 API"
-    })
+router.patch("/:orderId", (req, res) => {
+    // res.json({
+    //     msg: "order 수정 API"
+    // })
+    const updateOps = {}
+
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value
+    }
+
+    orderModel
+        .findByIdAndUpdate(req.params.orderId, { $set: updateOps })
+        .then(() => {
+            res.json({
+                msg: "updated order" + req.params.orderId
+            })
+        })
+        .catch(err => {
+            res.json({
+                msg: err.message
+            })
+        })
+
+
 })
 
 //전체 삭제

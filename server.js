@@ -16,7 +16,7 @@ const app = express()
 
 //DB connect
 const dbAddress = "mongodb+srv://admin:qwer@cluster0.huxry.mongodb.net/nodeshop1?retryWrites=true&w=majority"
-const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true }
+const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
 
 mongoose
     .connect(dbAddress, dbOptions)
