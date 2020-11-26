@@ -16,9 +16,10 @@ const app = express()
 
 //DB connect
 const dbAddress = "mongodb+srv://admin:qwer@cluster0.huxry.mongodb.net/nodeshop1?retryWrites=true&w=majority"
+const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true }
 
 mongoose
-    .connect(dbAddress)
+    .connect(dbAddress, dbOptions)
     .then(() => console.log("DB 연결 성공 "))
     .catch(err => console.log("+++++++++++++", err.message))
 
