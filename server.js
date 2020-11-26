@@ -3,6 +3,7 @@
 
 const express = require('express')
 
+const bodyParser = require('body-parser')
 const app = express()
 
 // //req res test
@@ -14,6 +15,9 @@ const app = express()
 
 const productRoute = require('./route/product')
 const orderRoute = require('./route/order')
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
 
 app.use("/pproduct", productRoute)
 app.use("/oorder", orderRoute)

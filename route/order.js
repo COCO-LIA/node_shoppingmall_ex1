@@ -8,8 +8,17 @@ router.get("/od", (req, res) => {
 })
 
 router.post("/", (req, res) => {
+
+    const orderInfo = {
+        name: req.body.productname,
+        price: req.body.productprice,
+        category: req.body.category
+    }
+
+
     res.json({
-        msg: "order 등록 API"
+        msg: "order 등록 API",
+        order: orderInfo
     })
 })
 
