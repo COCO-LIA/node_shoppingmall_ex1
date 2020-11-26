@@ -1,9 +1,16 @@
 const mongoose = require('mongoose')
 
 const orderSchema = mongoose.Schema({
-    name : String,
+    name : {
+        type: String,
+        required: true
+    },
     price: Number,
-    category: String
+    category: {
+        type: String,
+        required: true
+    },
+
 })
 
 module.exports = mongoose.model("order1", orderSchema)

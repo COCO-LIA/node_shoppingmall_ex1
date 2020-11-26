@@ -15,7 +15,18 @@ router.get("/od", (req, res) => {
             res.json({
                 msg: "total get",
                 count: docs.length,
-                order: docs
+                order: docs.map(doc => {
+                    return {
+                        id: doc._id,
+                        name: doc.name,
+                        price: doc.price,
+                        category: doc.category,
+                        request: {
+                            type: 'GET',
+                            url: "http://localhosst:5010/oorder/" + doc._id
+                        }
+                    }
+                })
             })
         })
         .catch(err => {
@@ -32,7 +43,16 @@ router.get("/:orderId", (req, res) => {
         .then(item => {
             res.json({
                 msg: "get order data" + item._id,
-                order: item
+                order: {
+                    id: item._id,
+                    name: item.name,
+                    price: item.price,
+                    category: item.category,
+                    reqest: {
+                        type: 'GET',
+                        url: "http://localhost:5010/oorder/od"
+                    }
+                }
             })
         })
         .catch(err => {
@@ -67,7 +87,16 @@ router.post("/", (req, res) => {
         .then(item => {
             res.json({
                 msg: "saved",
-                orderInfo: item
+                orderInfo: {
+                    id : item._id,
+                    name : item.name,
+                    price : item.price,
+                    category: item.category,
+                    request: {
+                        type: 'GET',
+                        url: "http://localhost:5010/oorder/" + item._id
+                    }
+                }
             })
         })
         .catch(err => {
@@ -91,7 +120,11 @@ router.patch("/:orderId", (req, res) => {
         .findByIdAndUpdate(req.params.orderId, { $set: updateOps })
         .then(() => {
             res.json({
-                msg: "updated order" + req.params.orderId
+                msg: "updated order" + req.params.orderId,
+                request: {
+                    type: 'GET',
+                    url: "http://localhost:5010/oorder/" + req.params.orderId
+                }
             })
         })
         .catch(err => {
@@ -113,7 +146,11 @@ router.delete("/", (req, res) =>{
         .deleteMany()
         .then(() => {
             res.json({
-                msg: "deleted All"
+                msg: "deleted All",
+                request: {
+                    type: 'GET',
+                    url: "http://localhost:5010/oorder/od"
+                }
             })
         })
         .catch(err => {
@@ -129,7 +166,11 @@ router.delete("/:orderId", (req, res) => {
         .findByIdAndDelete(req.params.orderId)
         .then(() => {
             res.json({
-                msg: "deleted order"
+                msg: "deleted order",
+                request:{
+                    type: 'GET',
+                    url: "http://localhost:5010/oorder/od"
+                }
             })
         })
         .catch(err => {
