@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97322a3a-ff74-4b1d-a6ff-7cb1e67e08a9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/route/order.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/route/product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/route/order.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +44,7 @@
       <updated>1605860373660</updated>
       <workItem from="1605860375165" duration="1041000" />
       <workItem from="1605955320541" duration="5000" />
-      <workItem from="1606364307013" duration="648000" />
+      <workItem from="1606364307013" duration="1229000" />
     </task>
     <servers />
   </component>
